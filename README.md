@@ -44,40 +44,12 @@ python3 model_preparation.py
 python3 benchmark.py
 ```
 
-## 💡 핵심 발견
-
-### 성능
-- NPU는 CPU보다 **23배 빠름**
-- Hybrid는 CPU보다 **6.3배 빠름**
-
-### 에너지 효율
-- NPU는 CPU 대비 **95% 에너지 절감**
-- 추론 1회당: CPU 0.286J → NPU 0.00515J
-
-### 비용 (Edge vs Cloud)
-- Edge NPU 초기 투자: 130,000원
-- Cloud TPU 연간 비용: 46,656,000원
-- **10.5개월 만에 투자 회수!**
-
-## 🔬 기술적 도전
-
-1. **Quantization 정확도**: NPU UINT8 ↔ CPU Float32 변환 최적화
-2. **병렬 처리 제약**: Hailo NPU 드라이버 스레드 안전성 문제
-3. **메모리 관리**: Edge 디바이스 리소스 제약
-
 ## 📖 참고
 
 - [Hailo-8L Datasheet](https://hailo.ai/products/hailo-8l/)
 - [MobileNets Paper](https://arxiv.org/abs/1704.04861)
 - Raspberry Pi 5: ARM Cortex-A76
 
-## 👨‍💻 개발자
-
-**오진혁**  
-경희대학교 컴퓨터공학과  
-Email: dhwlsgur795@khu.ac.kr  
-GitHub: [@JinHyeokOh01](https://github.com/JinHyeokOh01)
-
 ---
 
-**졸업 프로젝트 | 2024년 2학기**
+**졸업 프로젝트 | 2025년 2학기**
