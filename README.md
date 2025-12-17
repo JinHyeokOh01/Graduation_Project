@@ -1,0 +1,83 @@
+# CPU-NPU Hybrid Co-scheduling for Edge AI Inference
+
+Raspberry Pi 5 + Hailo-8L NPU를 활용한 하이브리드 AI 추론 시스템
+
+## 🎯 실험 목표
+
+MobileNetV1 이미지 분류를 CPU, NPU, Hybrid 방식으로 실행하여 성능, 정확도, 에너지 효율을 비교 분석
+
+## 📊 주요 결과
+
+| 방식 | Latency | Speedup | Top-1 정확도 | 에너지 효율 |
+|------|---------|---------|--------------|-------------|
+| **CPU** | 47.61ms | 1.00x | 29.5% | 1.00x |
+| **NPU** | 2.06ms | **23.21x** | 27.3% | **55x** |
+| **Hybrid** | 7.51ms | 6.34x | 0%* | 9.5x |
+
+*Hybrid는 quantization calibration 문제로 정확도 0% (기술적 과제)
+
+## 🛠️ 시스템 구성
+
+- **Hardware**: Raspberry Pi 5 (8GB)
+- **NPU**: Hailo-8L (13 TOPS)
+- **Model**: MobileNetV1 (ImageNet pretrained)
+- **Framework**: TensorFlow 2.15, Hailo Dataflow Compiler
+
+## 📁 파일 구조
+```
+├── model_preparation.py    # 모델 생성 및 양자화 스크립트 (WSL)
+├── benchmark.py            # 성능/에너지 벤치마크 스크립트 (Raspberry Pi)
+├── results.txt             # 실험 결과 상세
+└── test_images/            # 테스트 샘플 이미지
+```
+
+## 🚀 실행 방법
+
+### 1. 모델 준비 (WSL/Ubuntu)
+```bash
+python3 model_preparation.py
+```
+출력: `cpu_blocks_9_end_uint8.tflite`
+
+### 2. 벤치마크 실행 (Raspberry Pi + Hailo)
+```bash
+python3 benchmark.py
+```
+
+## 💡 핵심 발견
+
+### 성능
+- NPU는 CPU보다 **23배 빠름**
+- Hybrid는 CPU보다 **6.3배 빠름**
+
+### 에너지 효율
+- NPU는 CPU 대비 **95% 에너지 절감**
+- 추론 1회당: CPU 0.286J → NPU 0.00515J
+
+### 비용 (Edge vs Cloud)
+- Edge NPU 초기 투자: 130,000원
+- Cloud TPU 연간 비용: 46,656,000원
+- **10.5개월 만에 투자 회수!**
+
+## 🔬 기술적 도전
+
+1. **Quantization 정확도**: NPU UINT8 ↔ CPU Float32 변환 최적화
+2. **병렬 처리 제약**: Hailo NPU 드라이버 스레드 안전성 문제
+3. **메모리 관리**: Edge 디바이스 리소스 제약
+
+## 📖 참고
+
+- [Hailo-8L Datasheet](https://hailo.ai/products/hailo-8l/)
+- [MobileNets Paper](https://arxiv.org/abs/1704.04861)
+- Raspberry Pi 5: ARM Cortex-A76
+
+## 👨‍💻 개발자
+
+**오진혁**  
+경희대학교 컴퓨터공학과  
+Email: dhwlsgur795@khu.ac.kr  
+GitHub: [@JinHyeokOh01](https://github.com/JinHyeokOh01)
+
+---
+
+**졸업 프로젝트 | 2024년 2학기**

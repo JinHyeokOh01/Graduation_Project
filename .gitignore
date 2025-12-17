@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.hef
+*.tflite
+*.h5
+.DS_Store
+venv/
