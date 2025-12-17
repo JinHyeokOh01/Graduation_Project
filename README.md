@@ -1,4 +1,4 @@
-# CPU-NPU Hybrid Co-scheduling for Edge AI Inference
+# Block Partitioning-based CPU-NPU Hybrid Inference System
 
 Raspberry Pi 5 + Hailo-8L NPU를 활용한 하이브리드 AI 추론 시스템
 
